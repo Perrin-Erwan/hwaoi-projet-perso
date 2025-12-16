@@ -10,7 +10,7 @@
         
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="mb-0">🔍 Système de Jeu et Règles de Combat</h1>
-            <a href="{{ route('personnages.list') }}" class="btn btn-outline-secondary">
+            <a href="{{ route('personnage.list') }}" class="btn btn-outline-secondary">
                 ← Retour à la liste des Personnages
             </a>
         </div>

@@ -139,4 +139,9 @@ class PersonnageController extends Controller
 }
 
     // ... (manageTechniques method)
+
+    public function systemeJeu()
+    {
+        return view('systeme-jeu');
+    }
 }

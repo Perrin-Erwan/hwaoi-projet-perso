@@ -24,7 +24,7 @@
         {{-- SECTION D'INTRODUCTION ET DE PRÉSENTATION --}}
         <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
             <div class="col-md-10 px-0">
-                <h2 class="display-4 fst-italic">Chronique de l'Héritage : Les Guerriers du Sceau</h2>
+                <h2 class="display-4 fst-italic">Les Guerriers de l'ère du sceau</h2>
                 <p class="lead my-3">
                     Découvrez la liste complète des guerriers disponibles dans ce chapitre épique. 
                     De puissants Sages aux figures historiques, chaque personnage apporte des compétences et des éléments uniques pour façonner le destin du royaume.
@@ -62,7 +62,7 @@
                                 <p class="card-text">
                                     Cœurs : <span class="badge bg-danger">{{ $personnage->coeurs_base }}</span> | 
                                     Arme principale : {{ $personnage->arme_principale }}
-                                    Description : {{ Str::limit($personnage->description_courte, 100) }}
+                                    <br>Description : {{ Str::limit($personnage->description_courte, 100) }}
                                 </p>
                                 <a href="{{ route('personnage.show', ['personnage' => $personnage->nom]) }}" class="btn btn-primary btn-sm mt-2">Voir la fiche détaillée</a>
                             </div>
