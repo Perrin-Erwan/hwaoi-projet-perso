@@ -16,10 +16,10 @@ class attaqueSynchroseeder extends Seeder
             // Ajoutez ici les données de seed pour les attaques synchro
 
             'nom' => 'Descendance Sacrée',
-            'personnage_id' => 1, // ID du personnage principal
-            'partenaire_id' => 2, // ID du partenaire pour l'attaque synchro
+            'personnage' => 'zelda', // ID du personnage principal
+            'partenaire' => 'Rauru', // ID du partenaire pour l'attaque synchro
             'description' => 'Rauru et Zelda attaque main contre main un rayon de lumière surpuissant.',
-            'type' => 'Spéciale', // ou 'Spéciale'
+            'type' => 'special', // ou 'Spéciale'
         ];
     }
 }

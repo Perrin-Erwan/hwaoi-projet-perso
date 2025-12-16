@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             // ==========================================================
             // ORDRE LOGIQUE ET SANS DOUBLONS
             // ==========================================================
-            attaqueSynchroseeder::class,
+            AttaqueSynchroseeder::class,
             // 1. TECHNIQUES : Doivent exister pour pouvoir être liées aux styles et aux personnages.
             TechniqueSeeder::class, 
 

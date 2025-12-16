@@ -39,7 +39,7 @@ class PersonnageController extends Controller
     $personnage->load([
         'combatStyle', 
         'armes', 
-        'attaquesSynchro',
+        'attaqueSynchro',
         'attaquesSynchroEnPartenariat', // Ajouté pour s'assurer que cette relation est aussi chargée
         
         // Relation Many-to-Many avec la table pivot contenant 'mastery_level'
@@ -143,8 +143,8 @@ class PersonnageController extends Controller
         return view('systeme-jeu');
     }
 
-    public function attaquesSynchro()
+    public function attaqueSynchro()
     {
-        return redirect()->route('personnage.show', ['personnage' => 'attaques-synchro']);
+        return redirect()->route('personnage.show', ['personnage' => 'attaque-synchro']);
     }
 }

@@ -240,7 +240,7 @@
                 <div class="card-body">
                     @if($personnage->attaquesSynchro->count() > 0)
                         <ul class="list-group list-group-flush">
-                            @foreach ($personnage->attaquesSynchro as $attaque)
+                            @foreach ($personnage->attaqueSynchro as $attaque)
                                 <li class="list-group-item">
                                     <strong>{{ $attaque->nom }}</strong> 
                                     

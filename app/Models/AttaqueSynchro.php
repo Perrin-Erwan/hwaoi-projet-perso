@@ -8,13 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class AttaqueSynchro extends Model
 {
     use HasFactory;
-    protected $table = 'attaque_synchro';
+    protected $table = 'attaques_synchro';
 
     protected $fillable = [
         'nom',
         'description',
         'partenaire',
-        'personnage_id',
+        'personnage',
+        'type',
     ];
 
     // Relation inverse : une Attaque appartient à un Personnage// Fichier : app/Models/AttaqueSynchro.php
