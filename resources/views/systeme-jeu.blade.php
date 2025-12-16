@@ -34,7 +34,7 @@
                         <p>Les types d'armes génériques que nous avons définis sont :</p>
                         <div class="list-group">
                             <li class="list-group-item">Arme à une main (1M) : Équilibre entre vitesse et puissance.</li>
-                            <li class="list-group-item">**Arme à deux mains (2M) : Lenteur contre dégâts bruts.</li>
+                            <li class="list-group-item">Arme à deux mains (2M) : Lenteur contre dégâts bruts.</li>
                             <li class="list-group-item">Lance (L) : Portée et vitesse d'attaque élevées.</li>
                             <li class="list-group-item">Arc (A) : Attaques à distance (Raphica).</li>
                         </div>
