@@ -14,7 +14,7 @@ class AttaqueSynchro extends Model
         'nom',
         'description',
         'partenaire',
-        'personnage',
+        'personnage_id',
         'type',
     ];
 

@@ -71,7 +71,7 @@ class Personnage extends Model
     
     public function attaqueSynchro(): HasMany
     {
-        return $this->hasMany(AttaqueSynchro::class, 'personnage');
+        return $this->hasMany(AttaqueSynchro::class, 'personnage_id');
     }
     
     public function attaquesSynchroEnPartenariat(): HasMany

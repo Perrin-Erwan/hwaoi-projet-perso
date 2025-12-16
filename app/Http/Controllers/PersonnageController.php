@@ -145,6 +145,6 @@ class PersonnageController extends Controller
 
     public function attaqueSynchro()
     {
-        return redirect()->route('personnage.show', ['personnage' => 'attaque-synchro']);
+        return redirect()->route('personnage.show', ['personnage_id' => 'attaque-synchro']);
     }
 }
