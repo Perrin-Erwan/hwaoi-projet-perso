@@ -138,10 +138,13 @@ class PersonnageController extends Controller
         ->with('success', 'La liste des techniques apprises a été mise à jour.');
 }
 
-    // ... (manageTechniques method)
-
     public function systemeJeu()
     {
         return view('systeme-jeu');
+    }
+
+    public function attaquesSynchro()
+    {
+        return redirect()->('personnage.show', ['personnage' => 'attaques-synchro']);
     }
 }
