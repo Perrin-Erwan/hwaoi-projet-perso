@@ -33,47 +33,53 @@ class PersonnageController extends Controller
      * Utilise le Route Model Binding: l'objet Personnage est automatiquement chargé.
      */
     public function show(Personnage $personnage)
-{
-    // 1. Chargement des relations nécessaires pour la vue
-    // On utilise l'objet $personnage qui a été automatiquement récupéré
-    $personnage->load([
-        'combatStyle', 
-        'armes', 
-        'attaqueSynchro',
-        'attaquesSynchroEnPartenariat', // Ajouté pour s'assurer que cette relation est aussi chargée
+    {
+        // 1. Chargement des relations nécessaires pour la vue
+        // Le Route Model Binding a déjà chargé l'objet $personnage.
+        $personnage->load([
+            'combatStyle', 
+            'armes', 
+            
+            // ⚠️ ATTENTION : Si le nom de la relation est au singulier (attaqueSynchro), 
+            // c'est ce qui crée l'erreur SQL. Assurez-vous que le Modèle AttaqueSynchro 
+            // a bien 'protected $table = "attaques_synchro";'
+            'attaqueSynchro', 
+            'attaquesSynchroEnPartenariat', 
+            
+            // Relation Many-to-Many avec la table pivot contenant 'mastery_level'
+            'combatStyle.techniques' => function ($query) {
+                 $query->withPivot('mastery_level'); 
+             },
+            
+            'techniquesIndividuelles', 
+        ]);
         
-        // Relation Many-to-Many avec la table pivot contenant 'mastery_level'
-        // J'ai renommé 'skills' en 'techniques' pour être cohérent avec votre modèle
-        'combatStyle.techniques' => function ($query) {
-             $query->withPivot('mastery_level'); 
-         },
+        // --- Navigation Voisine ---
         
-        // Si vous utilisez 'techniques' pour les Techniques Individuelles, assurez-vous que c'est le bon nom
-        'techniquesIndividuelles', // Généralement le nom de la fonction de relation dans le modèle
-        
-        // Ajoutez ici les relations pour 'objets', 'artefactsSoneaux', 'attaquesAmalgamees'
-        // 'objets',
-        // 'artefactsSoneaux',
-        // 'attaquesAmalgamees',
-    ]);
-    
-    // 🚨 CORRECTION : Les lignes ci-dessous sont supprimées car elles provoquaient un conflit et l'erreur de variable $id non définie.
-    // $personnage = Personnage::findOrFail($id); 
+        // 2. Trouver le personnage PRÉCÉDENT
+        // On utilise l'ID pour trouver le précédent par ID (méthode la plus fiable)
+        $previousPersonnage = Personnage::where('id', '<', $personnage->id)
+                                        ->orderBy('id', 'desc')
+                                        ->first();
 
-    // 2. Trouver le personnage PRÉCÉDENT
-    // On utilise $personnage->id pour trouver le précédent par ID (méthode la plus fiable)
-    $previousPersonnage = Personnage::where('id', '<', $personnage->id)
-                                    ->orderBy('id', 'desc')
+        // 3. Trouver le personnage SUIVANT
+        $nextPersonnage = Personnage::where('id', '>', $personnage->id)
+                                    ->orderBy('id', 'asc')
                                     ->first();
-
-    // 3. Trouver le personnage SUIVANT
-    $nextPersonnage = Personnage::where('id', '>', $personnage->id)
-                                ->orderBy('id', 'asc')
-                                ->first();
-
-    // 4. Passer toutes les données à la vue
-    return view('personnage.show', compact('personnage', 'previousPersonnage', 'nextPersonnage'));
-}
+                                    
+        // --- Transmission des données ---
+        
+        // 4. Passer toutes les données à la vue
+        // On passe le personnage chargé, la navigation, et la relation des attaques synchro
+        return view('personnage.show', compact(
+            'personnage', 
+            'previousPersonnage', 
+            'nextPersonnage'
+            // NOTE : La relation 'attaqueSynchro' est maintenant disponible dans la vue via :
+            // $personnage->attaqueSynchro (si la relation existe)
+            // ou $personnage->attaquesSynchroEnPartenariat (si l'autre relation existe)
+        ));
+    }
 
     /**
      * Affiche le formulaire pour modifier un personnage existant.

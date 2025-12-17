@@ -61,9 +61,13 @@
                     <p class="card-text">{{ $personnage->description }}</p>
 
                         {{-- INFOS STATIQUES --}}
+                        <hr>
                         <li class="list-group-item mt-3"><strong>Arme par défaut :</strong> {{ $personnage->arme_principale }}</li>
+                        <hr>
                         <li class="list-group-item"><strong>Peuple d'Origine :</strong> {{ $personnage->role ?? 'N/A' }}</li> 
+                        <hr>
                         <li class="list-group-item"><strong>Élément personnel :</strong> <span class="badge bg-info text-dark">{{ $personnage->element ?? 'Physique' }}</span></li>
+                        <hr>
                         <li class="list-group-item">
                             <strong>Style de Combat :</strong> 
                             <span class="badge bg-secondary">{{ $personnage->combatStyle?->nom ?? 'Non défini' }}</span>
@@ -80,7 +84,7 @@
     {{-- ======================================================= --}}
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-success text-white">
-            Armes utilisables ({{ $personnage->armesUtilisables()->count() ?? 0 }}) - Cliquez pour Équiper
+            Armes utilisables ({{ $personnage->armesUtilisables()->count() ?? 0 }})
         </div>
         <div class="card-body">
             
@@ -235,10 +239,10 @@
         <div class="col-md-6 mb-4">
             <div class="card shadow-sm h-100">
                 <div class="card-header bg-danger text-white">
-                    Attaques Synchro spéciales ({{ $personnage->attaquesSynchro->count() }})
+                    Attaques Synchro spéciales ({{ $personnage->attaqueSynchro->count() }})
                 </div>
                 <div class="card-body">
-                    @if($personnage->attaquesSynchro->count() > 0)
+                    @if($personnage->attaqueSynchro->count() > 0)
                         <ul class="list-group list-group-flush">
                             @foreach ($personnage->attaqueSynchro as $attaque)
                                 <li class="list-group-item">

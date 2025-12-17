@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AttaqueSynchro extends Model
 {
     use HasFactory;
-    protected $table = 'attaques_synchro';
+    protected $table = 'attaque_synchro';
 
     protected $fillable = [
         'nom',
