@@ -254,7 +254,7 @@
                                         <span class="badge bg-secondary ms-2">Normale</span>
                                     @endif
                                     
-                                    <span class="badge bg-primary ms-2">Partenaire: {{ $attaque->partenaire }}</span>
+                                    <p>Partenaire: {{ $attaque->partenaireRel->nom ?? $attaque->partenaire }}</p>
                                     <p class="small text-muted mb-0">{{ $attaque->description }}</p>
                                 </li>
                             @endforeach
@@ -270,16 +270,16 @@
         <div class="col-md-6 mb-4">
             <div class="card shadow-sm h-100">
                 <div class="card-header bg-info text-dark">
-                    Attaques synchro normales ({{ $personnage->attaquesSynchroEnPartenariat->count() }})
+                    Attaques synchro normales ({{ $personnage->attaqueSynchro->count() }})
                 </div>
                 <div class="card-body">
-                    @if($personnage->attaquesSynchroEnPartenariat->count() > 0)
+                    @if($personnage->attaqueSynchro->count() > 0)
                         <ul class="list-group list-group-flush">
-                            @foreach ($personnage->attaquesSynchroEnPartenariat as $attaque)
+                            @foreach ($personnage->attaqueSynchro as $attaque)
                                 <li class="list-group-item">
                                     <strong>{{ $attaque->nom }}</strong> 
                                     
-                                    @if (strtolower($attaque->type) === 'special')
+                                    @if (strtolower($attaque->type) === 'normal')
                                         <span class="badge bg-warning text-dark ms-2">Spéciale</span>
                                     @else
                                         <span class="badge bg-secondary ms-2">Normale</span>

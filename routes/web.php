@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PersonnageController::class, 'accueil'])->name('personnage.accueil');
 
 // 2. Ancienne route index renommée en 'list' pour afficher TOUS les personnages
-Route::get('/personnages/list', [PersonnageController::class, 'index'])->name('personnage.list');
+Route::get('/personnages/list', action: [PersonnageController::class, 'index'])->name('personnage.list');
 
 // 3. Routes existantes (show, edit, update) utilisant le nom du personnage
 Route::get('/personnage/{personnage}', [PersonnageController::class, 'show'])->name('personnage.show');

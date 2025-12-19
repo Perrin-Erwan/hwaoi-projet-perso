@@ -26,4 +26,9 @@ public function personnage()
     // L'attaque appartient au personnage identifié par personnage_id
     return $this->belongsTo(Personnage::class, 'personnage_id');
 }
+
+public function partenaireRel() // Relation vers le personnage partenaire
+{
+    return $this->belongsTo(Personnage::class, 'partenaire');
+}
 }
