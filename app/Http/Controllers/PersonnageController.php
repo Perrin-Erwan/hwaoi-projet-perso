@@ -44,7 +44,8 @@ class PersonnageController extends Controller
             // c'est ce qui crée l'erreur SQL. Assurez-vous que le Modèle AttaqueSynchro 
             // a bien 'protected $table = "attaques_synchro";'
             'attaqueSynchro', 
-            'attaquesSynchroEnPartenariat', 
+            'attaqueSynchro.partenaireRel',
+            'attaquesEnTantQuePartenaire.personnage', 
             
             // Relation Many-to-Many avec la table pivot contenant 'mastery_level'
             'combatStyle.techniques' => function ($query) {

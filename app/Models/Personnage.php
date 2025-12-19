@@ -74,10 +74,10 @@ class Personnage extends Model
         return $this->hasMany(AttaqueSynchro::class, 'personnage_id');
     }
     
-    public function attaquesSynchroEnPartenariat(): HasMany
+    public function attaquesEnTantQuePartenaire(): HasMany
     {
         // 🚨 Assurez-vous que la colonne 'partner_personnage_id' existe dans votre table 'attaque_synchro'
-        return $this->hasMany(AttaqueSynchro::class, 'partner_personnage_id'); 
+        return $this->hasMany(AttaqueSynchro::class, 'partenaire'); 
     }
     
     // ========================================================
