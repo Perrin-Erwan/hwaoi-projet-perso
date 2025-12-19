@@ -40,7 +40,7 @@
         {{-- LIEN VERS LE SYSTÈME DE JEU --}}
         <div class="mb-4 d-flex justify-content-end">
             <a href="{{ route('systeme-jeu') }}" class="btn btn-info text-white shadow-sm">
-                🔍 Explorer le Système de Jeu
+                 Explorer le Système de Jeu
             </a>
         </div>
 

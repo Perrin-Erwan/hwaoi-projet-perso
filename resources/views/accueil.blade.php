@@ -28,12 +28,12 @@
         <div class="d-flex justify-content-between mb-4">
              {{-- Bouton pour la liste complète --}}
             <a href="{{ route('personnage.list') }}" class="btn btn-primary btn-lg shadow-sm">
-                ➡️ Afficher TOUS les Guerriers
+                 Afficher TOUS les Guerriers
             </a>
             
              {{-- Bouton pour le Système de Jeu --}}
             <a href="{{ route('systeme-jeu') }}" class="btn btn-info text-white btn-lg shadow-sm">
-                🔍 Système de Jeu
+                 Système de Jeu
             </a>
         </div>
         
