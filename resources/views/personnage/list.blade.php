@@ -55,6 +55,12 @@
                     <div class="col-md-4 mb-4">
                         <div class="card shadow-sm h-100">
                             <div class="card-body">
+                                @if ($personnage->image_path)
+                                <img src="{{ asset('images/personnages/' . $personnage->image_path) }}" 
+                                     class="card-img-top" 
+                                     alt="Image de {{ $personnage->nom }}" 
+                                     style="height: 200px; object-fit: cover;">
+                            @endif
                                 <h5 class="card-title">{{ $personnage->nom }} ({{ $personnage->alias ?? 'Guerrier' }})</h5>
                                 <p class="card-text small text-muted">
                                     Peuple : {{ $personnage->role ?? 'N/A' }}
