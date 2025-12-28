@@ -1,79 +1,89 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <title>Accueil - Chronique de l'Héritage</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
-<body>
+@extends('layouts.app')
+
+@section('title', 'Accueil - Chroniques du Sceau')
+
+@section('content')
+<div class="container mt-4">
     
-    <div class="container mt-4">
-        
-        <h1 class="mb-4 text-center text-primary">Hyrule Warriors : les chroniques du sceau</h1>
+    <h1 class="mb-4 text-center text-primary fw-bold">Hyrule Warriors : Les Chroniques du Sceau</h1>
 
-        {{-- SECTION D'INTRODUCTION --}}
-        <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
-            <div class="col-md-10 px-0">
-                <h2 class="display-4 fst-italic">Découvrez les événements de la guerre de l'ère des légendes</h2>
-                <p class="lead my-3">
-                    Ce jeu relate l'histoire de la guerre du sceau. Entre pouvoir, maitrise des armes et peuple, on est servis.
-                    Jouez plusieurs personnages au caractère différents et variés. Attaquez en duo pour plus de puissance !
-                </p>
-                <p class="lead mb-0">
-                    <span class="text-warning me-2">⭐</span>
-                    Explorez les personnages, ou plongez directement dans les règles de combat !
-                </p>
-            </div>
+    {{-- SECTION D'INTRODUCTION (HERO SECTION) --}}
+    <div class="p-4 p-md-5 mb-5 text-white rounded bg-dark shadow-lg border-start border-primary border-5">
+        <div class="col-md-10 px-0">
+            <h2 class="display-4 fst-italic">Découvrez la Guerre de l'Ère des Légendes</h2>
+            <p class="lead my-3">
+                Ce récit relate les événements tragiques et héroïques de la Guerre du Sceau. 
+                Entre la maîtrise des armes ancestrales et le destin des peuples d'Hyrule, plongez dans une aventure épique.
+            </p>
+            <p class="lead mb-0">
+                <span class="text-warning me-2">⭐</span>
+                <strong>Incarnez des guerriers légendaires</strong> et exploitez la puissance des attaques en duo pour triompher !
+            </p>
         </div>
-        
-        <div class="d-flex justify-content-between mb-4">
-             {{-- Bouton pour la liste complète --}}
-            <a href="{{ route('personnage.list') }}" class="btn btn-primary btn-lg shadow-sm">
-                 Afficher TOUS les Guerriers
-            </a>
-            
-             {{-- Bouton pour le Système de Jeu --}}
-            <a href="{{ route('systeme-jeu') }}" class="btn btn-info text-white btn-lg shadow-sm">
-                 Système de Jeu
+    </div>
+    
+    {{-- BOUTONS D'ACTION --}}
+    <div class="row mb-5">
+        <div class="col-md-6 mb-3">
+            <a href="{{ route('personnage.list') }}" class="btn btn-primary btn-lg w-100 shadow-sm py-3">
+                <i class="fas fa-users me-2"></i> Afficher TOUS les Guerriers
             </a>
         </div>
-        
-        <hr class="my-5">
+        <div class="col-md-6 mb-3">
+            <a href="{{ route('systeme-jeu') }}" class="btn btn-info text-white btn-lg w-100 shadow-sm py-3">
+                <i class="fas fa-book me-2"></i> Système de Jeu
+            </a>
+        </div>
+    </div>
+    
+    <hr class="my-5">
 
-        <h2 class="text-center mb-4">Aperçu de plusieurs Guerriers</h2>
+    {{-- APERÇU ALÉATOIRE --}}
+    <h2 class="text-center mb-4"><i class="fas fa-dice text-secondary me-2"></i> Guerriers en Vedette</h2>
 
-        {{-- AFFICHAGE DES 3 PERSONNAGES ALÉATOIRES --}}
-        @if ($personnagesAleatoires->count() > 0)
-            <div class="row">
-                @foreach ($personnagesAleatoires as $personnage)
-                    <div class="col-md-4 mb-4">
-                        <div class="card shadow-lg h-100">
-                             {{-- Affichage de l'image si elle existe --}}
-                            @if ($personnage->image_path)
-                                <img src="{{ asset('images/personnages/' . $personnage->image_path) }}" 
-                                     class="card-img-top" 
-                                     alt="Image de {{ $personnage->nom }}" 
-                                     style="height: 250px; object-fit: cover;">
-                            @endif
-                            
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $personnage->nom }} ({{ $personnage->alias ?? 'Guerrier' }})</h5>
-                                <p class="card-text small text-muted">
-                                    Peuple : {{ $personnage->role ?? 'N/A' }}
-                                </p>
-                                <a href="{{ route('personnage.show', ['personnage' => $personnage->nom]) }}" class="btn btn-primary btn-sm mt-2">Voir la fiche détaillée</a>
-                            </div>
+    @if ($personnagesAleatoires->count() > 0)
+        <div class="row">
+            @foreach ($personnagesAleatoires as $personnage)
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm h-100 border-0 transition-hover">
+                         {{-- Image du personnage --}}
+                        @if ($personnage->image_path)
+                            <img src="{{ asset('images/personnages/' . $personnage->image_path) }}" 
+                                 class="card-img-top" 
+                                 alt="Image de {{ $personnage->nom }}" 
+                                 style="height: 280px; object-fit: cover; background-color: #f8f9fa;">
+                        @endif
+                        
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-bold">{{ $personnage->nom }}</h5>
+                            <p class="card-text text-muted mb-3">
+                                <span class="badge bg-light text-dark border">{{ $personnage->role ?? 'Guerrier' }}</span>
+                            </p>
+                            <a href="{{ route('personnage.show', ['personnage' => $personnage->nom]) }}" 
+                               class="btn btn-outline-primary btn-sm px-4">
+                               Voir la fiche détaillée
+                            </a>
                         </div>
                     </div>
-                @endforeach
-            </div>
-        @else
-            <div class="alert alert-warning text-center" role="alert">
-                Aucun personnage trouvé dans la base de données.
-            </div>
-        @endif
+                </div>
+            @endforeach
+        </div>
+    @else
+        <div class="alert alert-warning text-center shadow-sm" role="alert">
+            Aucun guerrier n'est actuellement disponible dans la base de données.
+        </div>
+    @endif
 
-    </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
-</html>
+{{-- Petit style local pour l'effet de survol des cartes --}}
+<style>
+    .transition-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .transition-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
+    }
+</style>
+@endsection
