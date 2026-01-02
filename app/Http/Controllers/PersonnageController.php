@@ -154,4 +154,9 @@ class PersonnageController extends Controller
     {
         return redirect()->route('personnage.show', ['personnage_id' => 'attaque-synchro']);
     }
+
+    public function artefactsSoneaux()
+    {
+        return redirect()->route('personnage.show', ['personnage_id' => 'artefactsSoneaux']);
+    }
 }

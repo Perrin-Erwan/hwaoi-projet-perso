@@ -79,6 +79,11 @@ class Personnage extends Model
         // 🚨 Assurez-vous que la colonne 'partner_personnage_id' existe dans votre table 'attaque_synchro'
         return $this->hasMany(AttaqueSynchro::class, 'partenaire'); 
     }
+
+    public function artefactsSoneaux(): HasMany
+    {
+        return $this->hasMany(ArtefactSoneaux::class, 'personnage_id');
+    }
     
     // ========================================================
     // ACCESSEURS (Attributes)
