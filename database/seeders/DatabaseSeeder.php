@@ -15,29 +15,21 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            // ==========================================================
-            // ORDRE LOGIQUE ET SANS DOUBLONS
-            // ==========================================================
-            AttaqueSynchroSeeder::class,
-            // 1. TECHNIQUES : Doivent exister pour pouvoir être liées aux styles et aux personnages.
-            TechniqueSeeder::class, 
-
-            // 2. STYLES DE COMBAT : Doivent exister pour être liés aux Personnages. 
-            // Ils lient aussi les Techniques (via style_technique).
+            // 1. DATA INDÉPENDANTES (Techniques, Styles, Armes, Artefacts)
             CombatStyleSeeder::class, 
-
-            // 3. PERSONNAGES : Doivent être créés. 
-            // Ils référencent CombatStyle (via classe_id).
-            PersonnageSeeder::class, 
+            // 2. PERSONNAGES (Dépendent de CombatStyle)
+            PersonnageSeeder::class,
+            ArmeSeeder::class, 
             TechniqueSeeder::class,
-            // 4. LIAISON PERSONNAGE <-> TECHNIQUE : Les pivots doivent exister.
-            PersonnageTechniqueSeeder::class, 
-
-            // (Ajouter ici les seeders pour Arme, AttaqueSynchro, etc., si vous en avez)
             ArtefactsSoneauxSeeder::class,
-            ArmeSeeder::class,
+            // 3. LIAISONS ET DÉTAILS (Dépendent des Personnages existants)
+            PersonnageTechniqueSeeder::class, 
             PersonnageImagePathSeeder::class,
-
+            
+            // 4. ATTAQUES SPÉCIALES (Dépendent des Personnages)
+            AttaqueSynchroSeeder::class,
+            AttaqueAmalgameesSeeder::class, // Ajout de ton nouveau Seeder ici
+            EnnemisSeeder::class,
         ]);
     }
 }
