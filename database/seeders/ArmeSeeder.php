@@ -103,13 +103,13 @@ class ArmeSeeder extends Seeder
             ],
             'Espadon de lumière' => [
                 'type' => 'Arme à deux mains',
-                'puissance_base' => 50,
+                'puissance_base' => 108,
                 'personnages' => ['Chevalier Golem', 'Quino', 'Pastos', 'Ronza'],
             ],
 
             'Lance de garde d\'élite' => [
                 'type' => 'Lance',
-                'puissance_base' => 50,
+                'puissance_base' => 22,
                 'personnages' => ['Chevalier Golem', 'Cadlan', 'Masba', 'Braton'],
             ],
 
