@@ -61,6 +61,11 @@
                         <a class="nav-link {{ request()->routeIs('ennemis.index') ? 'active' : '' }}" 
                            href="{{ route('ennemis.index') }}">Bestiaire</a>
                     </li>
+                    <li class="nav-item">
+                        {{-- Ajout de la page Amalgames --}}
+                        <a class="nav-link {{ request()->routeIs('amalgames.index') ? 'active' : '' }}" 
+                           href="{{ route('amalgames.index') }}">Amalgames</a>
+                    </li>
                 </ul>
             </div>
         </div>

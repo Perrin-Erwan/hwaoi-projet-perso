@@ -27,11 +27,11 @@
             </div>
         </div>
 
-        {{-- Navigation des catégories --}}
-        <ul class="nav nav-pills nav-fill mb-4 shadow-sm p-2 bg-white rounded" id="bestiaireTabs" role="tablist">
+        {{-- Navigation des catégories stylisée --}}
+        <ul class="nav nav-pills nav-fill mb-4 p-2 custom-nav-pills rounded" id="bestiaireTabs" role="tablist">
             @foreach($ennemis as $categorie => $liste)
             <li class="nav-item" role="presentation">
-                <button class="nav-link {{ $loop->first ? 'active bg-danger' : 'text-dark' }} fw-bold" 
+                <button class="nav-link {{ $loop->first ? 'active' : '' }} fw-bold" 
                         id="{{ Str::slug($categorie) }}-tab" 
                         data-bs-toggle="tab" 
                         data-bs-target="#{{ Str::slug($categorie) }}" 
@@ -139,13 +139,45 @@
         color: #eee !important;
     }
 
-    .nav-pills {
-        background: rgba(0, 0, 0, 0.6) !important;
-        border: 1px solid #8B0000;
+   /* Barre d'onglets personnalisée */
+    .custom-nav-pills {
+        background: rgba(0, 0, 0, 0.6) !important; /* Fond sombre transparent */
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .nav-pills .nav-link:not(.active) {
+    /* Style par défaut des liens non-actifs */
+    .custom-nav-pills .nav-link {
         color: #ffffff !important;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+    }
+
+    /* Style de l'onglet ACTIF (devient rouge pour n'importe quelle catégorie) */
+    .custom-nav-pills .nav-link.active {
+        background-color: #8B0000 !important; /* Rouge foncé Hyrule Warriors */
+        color: #ffffff !important;
+        box-shadow: 0 0 15px rgba(139, 0, 0, 0.4);
+    }
+
+    /* Effet au survol des onglets non-actifs */
+    .custom-nav-pills .nav-link:hover:not(.active) {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #2DFFD9 !important; /* Texte turquoise au survol */
+    }
+
+    /* Ajustement de la barre de recherche pour qu'elle ne soit pas trop "flashy" */
+    .border-custom {
+        background: rgba(20, 20, 20, 0.9) !important;
+        border: 2px solid #2DFFD9 !important;
+    }
+    
+    .border-custom input {
+        color: white !important;
+        background: transparent !important;
+    }
+
+    .border-custom input::placeholder {
+        color: rgba(255,255,255,0.5);
     }
 
     /* Adaptation de la barre de recherche */
