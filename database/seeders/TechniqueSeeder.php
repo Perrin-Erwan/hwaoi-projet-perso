@@ -112,7 +112,7 @@ public function run(): void
         ],
         'Chevalier Golem' => [
             [
-                'nom' => 'Attaque tournoyante (épée à une main)', 
+                'nom' => 'Attaque tournoyante (1M)', 
                 'description' => 'élevez-vous dans les airs en faisant tournoyer votre arme puis portez un coup vers le ciel.', 
                 'dégâts' => 70
             ],
@@ -122,30 +122,30 @@ public function run(): void
                 'dégâts' => 0
             ],
             [
-                'nom' => 'Plongeon golem (épée à une main)', 
+                'nom' => 'Plongeon golem (1M)', 
                 'description' => 'Bondissez vers l\'avant et allongez vos bras planter votre arme dans le sol. 
                 Rétractez ensuite vos bras pour vous écraser au sol en déclenchant une onde de choc.', 
                 'dégâts' => 75
             ],
             [
-                'nom' => 'Charge bouclier (épée à une main)', 
+                'nom' => 'Charge bouclier (1M)', 
                 'description' => 'Levez votre bouclier puis chargez vers l\'avant. 
                 L\'attaque sera plus puissante si vous déclenchez en même temps que l\'ennemi.', 
                 'dégâts' => 80
             ],
             [
-                'nom' => 'Coup de pied riposte (épée à deux mains)', 
+                'nom' => 'Coup de pied riposte (2M)', 
                 'description' => 'Plantez votre arme dans le sol puis reculez rapidement en tendant vos bras, 
                 avant de les rétracter pour foncer en avant et donner un puissant coup de pied.', 
                 'dégâts' => 95
             ],
             [
-                'nom' => 'Bras destructeurs (épée à deux mains)', 
+                'nom' => 'Bras destructeurs (2M)', 
                 'description' => 'Tendez vos bras pour brandir votre arme, puis déclenchez une frappe puissante.', 
                 'dégâts' => 100
             ],
             [
-                'nom' => 'Fouet aérien (épée à deux mains)', 
+                'nom' => 'Fouet aérien (2M)', 
                 'description' => 'décrivez de grands arcs de cercle avec votre arme pour prendre de l\'élan, puis donnez un puissant coup vers le haut.', 
                 'dégâts' => 90
             ],
