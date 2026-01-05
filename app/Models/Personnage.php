@@ -84,6 +84,11 @@ class Personnage extends Model
     {
         return $this->hasMany(ArtefactSoneaux::class, 'personnage_id');
     }
+
+    public function attaquesAmalgamees()
+{
+    return $this->hasMany(AttaqueAmalgamees::class, 'personnage_id');
+}
     
     // ========================================================
     // ACCESSEURS (Attributes)

@@ -125,12 +125,24 @@ public function run(): void
                 'nom' => 'Plongeon golem (épée à une main)', 
                 'description' => 'Bondissez vers l\'avant et allongez vos bras planter votre arme dans le sol. 
                 Rétractez ensuite vos bras pour vous écraser au sol en déclenchant une onde de choc.', 
-                'dégâts' => 75],
+                'dégâts' => 75
+            ],
+            [
+                'nom' => 'Charge bouclier (épée à une main)', 
+                'description' => 'Levez votre bouclier puis chargez vers l\'avant. 
+                L\'attaque sera plus puissante si vous déclenchez en même temps que l\'ennemi.', 
+                'dégâts' => 80
+            ],
             [
                 'nom' => 'Coup de pied riposte (épée à deux mains)', 
                 'description' => 'Plantez votre arme dans le sol puis reculez rapidement en tendant vos bras, 
                 avant de les rétracter pour foncer en avant et donner un puissant coup de pied.', 
                 'dégâts' => 95
+            ],
+            [
+                'nom' => 'Bras destructeurs (épée à deux mains)', 
+                'description' => 'Tendez vos bras pour brandir votre arme, puis déclenchez une frappe puissante.', 
+                'dégâts' => 100
             ],
             [
                 'nom' => 'Fouet aérien (épée à deux mains)', 
@@ -146,6 +158,12 @@ public function run(): void
                 'nom' => 'Rafale tourbillonnante (lance)', 
                 'description' => 'Faites tournez votre lance rapidement pour créer une grande tornade devant vous.', 
                 'dégâts' => 40
+            ],
+             [
+                'nom' => 'Saut tournoyant (lance)', 
+                'description' => 'Sautez en l\'air en tendant votre corps et en brandissant votre lance, 
+                et déclenchez un enchainement tournoyant en montant.', 
+                'dégâts' => 60
             ],
         ],
         'Calamo' => [

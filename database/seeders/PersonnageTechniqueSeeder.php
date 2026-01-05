@@ -40,7 +40,7 @@ class PersonnageTechniqueSeeder extends Seeder
                 'Coup de pied foudroyant', 'Charge tonitruante', 'Choc conducteur', 'Frappe fulgurante'
             ],
             'Chevalier Golem' => [
-                'Attaque tournoyante (épée à une main)', 'Pleine puissance', 'Plongeon golem (épée à une main)', 'Coup de pied riposte (épée à deux mains)', 'Fouet aérien (épée à deux mains)', 'Coup riposte (lance)', 'Rafale tourbillonnante (lance)'
+                'Attaque tournoyante (épée à une main)', 'Pleine puissance', 'Plongeon golem (épée à une main)','Charge bouclier (épée à une main)', 'Coup de pied riposte (épée à deux mains)', 'Bras destructeurs (épée à deux mains)', 'Fouet aérien (épée à deux mains)', 'Coup riposte (lance)', 'Saut tournoyant (lance)', 'Rafale tourbillonnante (lance)'
             ],
             'Calamo' => [
                 'Rebond fongique', 'Charge de clarté', 'Fleur bombe'

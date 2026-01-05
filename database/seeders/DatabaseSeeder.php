@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             // ==========================================================
             // ORDRE LOGIQUE ET SANS DOUBLONS
             // ==========================================================
-            AttaqueSynchroseeder::class,
+            AttaqueSynchroSeeder::class,
             // 1. TECHNIQUES : Doivent exister pour pouvoir être liées aux styles et aux personnages.
             TechniqueSeeder::class, 
 
@@ -29,11 +29,15 @@ class DatabaseSeeder extends Seeder
             // 3. PERSONNAGES : Doivent être créés. 
             // Ils référencent CombatStyle (via classe_id).
             PersonnageSeeder::class, 
-
+            TechniqueSeeder::class,
             // 4. LIAISON PERSONNAGE <-> TECHNIQUE : Les pivots doivent exister.
             PersonnageTechniqueSeeder::class, 
 
             // (Ajouter ici les seeders pour Arme, AttaqueSynchro, etc., si vous en avez)
+            ArtefactsSoneauxSeeder::class,
+            ArmeSeeder::class,
+            PersonnageImagePathSeeder::class,
+
         ]);
     }
 }

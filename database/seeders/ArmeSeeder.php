@@ -89,11 +89,28 @@ class ArmeSeeder extends Seeder
                 'personnages' => ['Chevalier Golem', 'Typhan', 'Lago', 'Vence', 'Sholani'],
             ],
 
+            'Épée maudite' => [
+                'type' => 'Arme à une main',
+                'puissance_base' => 78,
+                'personnages' => ['Chevalier Golem', 'Typhan', 'Lago', 'Vence', 'Sholani'],
+            ],
+
             // Espadon de garde d'élite (2M) - Chevalier Golem, Quino, Pastos, Ronza
             'Espadon de garde d\'élite' => [
                 'type' => 'Arme à deux mains',
                 'puissance_base' => 50,
                 'personnages' => ['Chevalier Golem', 'Quino', 'Pastos', 'Ronza'],
+            ],
+            'Espadon de lumière' => [
+                'type' => 'Arme à deux mains',
+                'puissance_base' => 50,
+                'personnages' => ['Chevalier Golem', 'Quino', 'Pastos', 'Ronza'],
+            ],
+
+            'Lance de garde d\'élite' => [
+                'type' => 'Lance',
+                'puissance_base' => 50,
+                'personnages' => ['Chevalier Golem', 'Cadlan', 'Masba', 'Braton'],
             ],
 
             // --- ARMES GÉNÉRIQUES (personnage_id = null) ---
@@ -133,6 +150,7 @@ class ArmeSeeder extends Seeder
             ['nom' => 'Brise-roc', 'type' => 'Arme à deux mains'],
             ['nom' => 'Espadon de soldat émérite', 'type' => 'Arme à deux mains'],
             ['nom' => 'Espadon de sonium surpuissant', 'type' => 'Arme à deux mains'],
+            
             
             // Lances (L)
             ['nom' => 'Masse perforatrice', 'type' => 'Lance'],

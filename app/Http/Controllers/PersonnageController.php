@@ -159,4 +159,9 @@ class PersonnageController extends Controller
     {
         return redirect()->route('personnage.show', ['personnage_id' => 'artefactsSoneaux']);
     }
+
+    public function attaquesAmalgamees()
+    {
+        return redirect()->route('personnage.show', ['personnage_id' => 'attaquesAmalgamees']);
+    }
 }

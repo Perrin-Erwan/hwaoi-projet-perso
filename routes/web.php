@@ -3,6 +3,7 @@
 use App\Http\Controllers\PersonnageController;
 use App\Http\Controllers\TechniqueIndividuelleController;
 use App\Http\Controllers\CombatStyleController;
+use App\Http\Controllers\EnnemiController;
 use Illuminate\Support\Facades\Route;
 
 //Route::get('/personnage', [PersonnageController::class, 'index'])->name('personnages.list');
@@ -38,3 +39,5 @@ Route::get('/techniques-individuelles', [TechniqueIndividuelleController::class,
     ->name('technique-individuelles.index');
 Route::resource('styles-de-combat', CombatStyleController::class)->only(['index', 'show'])
     ->names(['index' => 'combat-styles.index', 'show' => 'combat-styles.show']);
+// ... autres routes ...
+Route::get('/bestiaire', [App\Http\Controllers\EnnemiController::class, 'index'])->name('ennemis.index');

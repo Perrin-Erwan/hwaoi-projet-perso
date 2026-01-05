@@ -157,41 +157,63 @@
     </div>
 
     {{-- ARTÉFACTS ET AMALGAMES --}}
-    <div class="row mt-4">
-        <div class="col-md-6 mb-4">
-            <div class="card shadow-sm h-100">
-                <div class="card-header bg-info text-white">Artéfacts Soneaux</div>
-                <div class="card-body">
-                    @if (method_exists($personnage, 'artefactsSoneaux') && $personnage->artefactsSoneaux->count() > 0)
-                        <ul class="list-group list-group-flush">
-                            @foreach ($personnage->artefactsSoneaux as $artefact)
-                                <li class="list-group-item"><strong>{{ $artefact->nom }}</strong></li>
-                            @endforeach
-                        </ul>
-                    @else
-                        <p class="mb-0">Aucun Artéfact.</p>
-                    @endif
-                </div>
-            </div>
+   {{-- SECTION ARTÉFACTS SONEAUX --}}
+<div class="col-md-6 mb-4">
+    <div class="card shadow-sm h-100">
+        <div class="card-header bg-info text-white fw-bold">
+            <i class="fas fa-tools me-2"></i> Artéfacts Soneaux
         </div>
-
-        <div class="col-md-6 mb-4">
-             <div class="card shadow-sm h-100">
-                <div class="card-header bg-dark text-white">Attaques Amalgamées</div>
-                <div class="card-body">
-                    @if (method_exists($personnage, 'attaquesAmalgamees') && $personnage->attaquesAmalgamees->count() > 0)
-                        <ul class="list-group list-group-flush">
-                            @foreach ($personnage->attaquesAmalgamees as $amalgame)
-                                <li class="list-group-item"><strong>{{ $amalgame->nom }}</strong></li>
-                            @endforeach
-                        </ul>
-                    @else
-                        <p class="mb-0">Aucune attaque amalgamée.</p>
-                    @endif
+        <div class="card-body">
+            @if ($personnage->artefactsSoneaux && $personnage->artefactsSoneaux->count() > 0)
+                <div class="accordion" id="accordionSoneau">
+                    @foreach ($personnage->artefactsSoneaux as $index => $artefact)
+                        <div class="accordion-item mb-2 border">
+                            <h2 class="accordion-header" id="heading{{ $index }}">
+                                <button class="accordion-button collapsed py-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $index }}">
+                                    <div class="d-flex justify-content-between w-100 align-items-center">
+                                        <span class="fw-bold">{{ $artefact->nom }}</span>
+                                        <span class="badge bg-primary rounded-pill me-3">Puissance : {{ $artefact->effet }}</span>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="collapse{{ $index }}" class="accordion-collapse collapse" data-bs-parent="#accordionSoneau">
+                                <div class="accordion-body small text-muted">
+                                    {{ $artefact->description }}
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-            </div>
+            @else
+                <p class="text-center text-muted my-3">Aucun artéfact soneau dans l'inventaire.</p>
+            @endif
         </div>
     </div>
+</div>
+{{-- SECTION ATTAQUES AMALGAMÉES --}}
+@if ($personnage->attaquesAmalgamees->count() > 0)
+<div class="card shadow-sm border-dark mt-4">
+    <div class="card-header bg-dark text-white fw-bold">
+        <i class="fas fa-hammer me-2"></i> Capacité d'Amalgame Soneau
+    </div>
+    <div class="card-body">
+        <div class="row">
+            @foreach ($personnage->attaquesAmalgamees as $amalgame)
+                <div class="col-md-6 mb-3">
+                    <div class="p-3 border rounded bg-light h-100 shadow-sm">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge bg-secondary">{{ $amalgame->arme_requise }}</span>
+                            <span class="badge bg-danger">Puissance : {{ $amalgame->degats }}</span>
+                        </div>
+                        <h6 class="fw-bold text-primary mb-1">{{ $amalgame->nom }}</h6>
+                        <p class="small text-muted mb-0"><em>{{ $amalgame->description }}</em></p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+@endif
     
     {{-- ======================================================= --}}
     {{-- SECTION ATTAQUES SYNCHRO (COLONNE UNIQUE) --}}

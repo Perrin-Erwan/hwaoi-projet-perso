@@ -38,7 +38,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('personnages.list') ? 'active' : '' }}" 
+                        <a class="nav-link {{ request()->routeIs('personnage.list') ? 'active' : '' }}" 
                            href="{{ route('personnage.list') }}">Guerriers</a>
                     </li>
                     <li class="nav-item">
@@ -55,6 +55,11 @@
                         {{-- Ajout de la page Système de Jeu --}}
                         <a class="nav-link {{ request()->routeIs('systeme-jeu') ? 'active' : '' }}" 
                            href="{{ route('systeme-jeu') }}">Règles de Jeu</a>
+                    </li>
+                    <li class="nav-item">
+                        {{-- Ajout de la page Ennemis --}}
+                        <a class="nav-link {{ request()->routeIs('ennemis.index') ? 'active' : '' }}" 
+                           href="{{ route('ennemis.index') }}">Bestiaire</a>
                     </li>
                 </ul>
             </div>
