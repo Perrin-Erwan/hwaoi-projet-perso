@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\ArtefactSoneaux;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Personnage;
@@ -14,6 +15,10 @@ class ArtefactsSoneauxSeeder extends Seeder
      */
     public function run(): void
     {
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        ArtefactSoneaux::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         // On récupère par exemple Zelda ou le premier perso pour leur donner les objets
     $tousLesPersonnages = Personnage::all();
 
