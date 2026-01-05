@@ -47,7 +47,7 @@ class ArmeSeeder extends Seeder
                 'nom' => 'Sceptre royal', 
                 'type' => 'Arme à une main', 
                 'personnage_nom' => 'Mineru',
-                'puissance_base' => 30,
+                'puissance_base' => 98,
             ],
             [
                 'nom' => 'Brise-montagne', 
