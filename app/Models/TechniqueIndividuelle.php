@@ -32,4 +32,9 @@ public function personnageSpecifique(): BelongsTo
         // 2. Le nom de la table pivot (personnage_technique_individuelle)
         return $this->belongsToMany(Personnage::class, 'personnage_technique_individuelle');
     }
+
+    public function styles()
+{
+    return $this->belongsToMany(CombatStyle::class, 'style_technique', 'technique_id', 'style_id');
+}
 }

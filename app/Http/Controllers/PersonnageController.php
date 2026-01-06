@@ -164,4 +164,9 @@ class PersonnageController extends Controller
     {
         return redirect()->route('personnage.show', ['personnage_id' => 'attaquesAmalgamees']);
     }
+
+    public function styles() {
+        $personnages = Personnage::all();
+        return view('styles-combat.index', compact('personnages'));
+    }
 }

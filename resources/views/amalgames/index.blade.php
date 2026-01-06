@@ -1,157 +1,136 @@
 @extends('layouts.app')
 
-@section('title', 'Archives des Amalgames Soneaux')
-
 @section('content')
 <div class="warriors-page py-5">
     <div class="container">
         
-        {{-- HEADER ÉPIQUE --}}
         <div class="text-center mb-5">
-            <div class="soneau-header-main d-inline-block px-5 py-3 shadow-lg">
-                <h1 class="display-4 fw-bold text-uppercase m-0">Forge d'Amalgame</h1>
-                <div class="h5 text-dark italic m-0">Technologie Ancestrale & Synergie d'Armes</div>
-            </div>
-            <p class="lead text-white-50 mt-4 mx-auto col-md-8">
-                Consultez les archives des combinaisons d'armes et d'objets. L'amalgame permet de transcender la puissance brute pour libérer des capacités dévastatrices.
-            </p>
+            <h1 class="display-4 fw-bold text-turquoise">FORGE DES AMALGAMES</h1>
+            <p class="text-white-50">Répertoire des synergies par guerrier</p>
         </div>
 
-        {{-- GRILLE DES AMALGAMES --}}
-        <div class="row g-4">
-            @forelse($amalgames as $amalgame)
-                <div class="col-md-6 col-lg-4">
-                    <div class="amalgame-card h-100">
-                        {{-- En-tête de la carte --}}
-                        <div class="amalgame-card-header d-flex justify-content-between align-items-center">
-                            <span class="badge-type">{{ $amalgame->arme_requise }}</span>
-                            <div class="damage-display">
-                                <span class="small opacity-50">PUISSANCE</span>
-                                <span class="text-danger fw-bold ms-1">{{ $amalgame->degats }}</span>
-                            </div>
-                        </div>
+        @forelse($amalgames as $nomPersonnage => $attaques)
+            <div class="personnage-section mb-5">
+                {{-- Titre du Groupe (Le Guerrier) --}}
+                <h2 class="h4 border-bottom border-danger pb-2 mb-4 text-uppercase fw-bold">
+                    <i class="fas fa-shield-alt text-danger me-2"></i>
+                    {{ $nomPersonnage ?: 'Capacités Générales' }}
+                </h2>
 
-                        {{-- Corps de la carte --}}
-                        <div class="p-4">
-                            <h4 class="text-turquoise text-uppercase fw-bold mb-3">{{ $amalgame->nom }}</h4>
-                            
-                            <div class="description-box mb-3">
-                                <p class="small text-white-50 italic mb-0">
-                                    "{{ $amalgame->description }}"
-                                </p>
-                            </div>
-
-                            {{-- Détails techniques --}}
-                            <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top border-secondary border-opacity-25">
-                                <div class="character-link">
-                                    <i class="fas fa-user-ninja me-2 text-white-50"></i>
-                                    <span class="small fw-bold">{{ $amalgame->personnage->nom ?? 'Tous Guerriers' }}</span>
+                <div class="row g-3">
+                    @foreach($attaques as $amalgame)
+                        <div class="col-md-4">
+                            <div class="amalgame-card h-100 p-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="badge bg-dark border-turquoise text-turquoise">{{ $amalgame->arme_requise }}</span>
+                                    <span class="text-danger fw-bold">{{ $amalgame->degats }} PV</span>
                                 </div>
-                                <i class="fas fa-microchip text-turquoise opacity-50"></i>
+                                <h5 class="fw-bold text-white mb-2">{{ $amalgame->nom }}</h5>
+                                <p class="small text-white-50 mb-0 italic" style="font-size: 0.8rem;">
+                                    {!! nl2br(e($amalgame->description)) !!}
+                                </p>
+                                {{-- Badge d'élément dynamique --}}
+                                <div class="mt-3">
+                                    <span class="badge element-{{ Str::slug($amalgame->type) }} small">
+                                        {{ $amalgame->type }}
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                        
-                        {{-- Décoration Soneau --}}
-                        <div class="soneau-corner"></div>
-                    </div>
+                    @endforeach
                 </div>
-            @empty
-                <div class="col-12 text-center py-5">
-                    <div class="alert bg-dark text-turquoise border-turquoise shadow-lg">
-                        <i class="fas fa-hammer me-2"></i> La forge est vide. Aucun amalgame n'a été recensé.
-                    </div>
-                </div>
-            @endforelse
-        </div>
-
-        <div class="mt-5 text-center">
-            <a href="{{ route('personnage.list') }}" class="btn btn-warriors-outline">
-                <i class="fas fa-chevron-left me-2"></i> Retour aux Guerriers
-            </a>
-        </div>
+            </div>
+        @empty
+            <p class="text-center text-white-50">Aucun amalgame détecté.</p>
+        @endforelse
     </div>
 </div>
 
 <style>
-    /* --- CONFIGURATION DES COULEURS --- */
-    body {
+
+     body {
         background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%) !important;
         background-attachment: fixed !important;
+        color: #eee;
     }
 
     .text-turquoise { color: #2DFFD9 !important; }
-    .border-turquoise { border-color: #2DFFD9 !important; }
 
     /* --- HEADER SONEAU --- */
     .soneau-header-main {
         background: #2DFFD9;
         color: #000;
-        border-radius: 4px;
-        position: relative;
         clip-path: polygon(5% 0%, 95% 0%, 100% 50%, 95% 100%, 5% 100%, 0% 50%);
     }
 
-    /* --- CARTES D'AMALGAME --- */
+    /* --- CARDS --- */
     .amalgame-card {
-        background: rgba(255, 255, 255, 0.03);
+        background: rgba(255, 255, 255, 0.05);
         border: 1px solid rgba(45, 255, 217, 0.2);
-        border-radius: 12px;
+        border-radius: 10px;
         position: relative;
-        overflow: hidden;
-        transition: all 0.4s ease;
+        transition: 0.3s;
         display: flex;
         flex-direction: column;
     }
 
     .amalgame-card:hover {
-        transform: translateY(-10px);
-        background: rgba(45, 255, 217, 0.05);
         border-color: #2DFFD9;
-        box-shadow: 0 0 25px rgba(45, 255, 217, 0.2);
+        transform: translateY(-5px);
+        box-shadow: 0 0 20px rgba(45, 255, 217, 0.2);
     }
 
     .amalgame-card-header {
-        background: rgba(0, 0, 0, 0.5);
-        padding: 10px 15px;
-        border-bottom: 1px solid rgba(45, 255, 217, 0.1);
+        background: rgba(0, 0, 0, 0.3);
+        padding: 12px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .badge-type {
-        background: rgba(255, 255, 255, 0.1);
-        color: #fff;
-        padding: 3px 10px;
-        border-radius: 4px;
-        font-size: 0.75rem;
+        font-size: 0.7rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #2DFFD9;
         letter-spacing: 1px;
     }
 
-    .description-box {
-        min-height: 60px;
-    }
-
-    /* --- DÉCORATION SONEAU --- */
-    .soneau-corner {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        width: 30px;
-        height: 30px;
-        background: linear-gradient(135deg, transparent 50%, #2DFFD9 50%);
-        opacity: 0.3;
-    }
-
-    /* --- BOUTON RETOUR --- */
-    .btn-warriors-outline {
-        border: 1px solid #8B0000;
-        color: white;
-        text-transform: uppercase;
+    /* --- ÉLÉMENTS --- */
+    .badge-element {
+        font-size: 0.6rem;
+        padding: 3px 8px;
+        border-radius: 3px;
         font-weight: bold;
-        padding: 12px 30px;
-        transition: 0.3s;
+        border: 1px solid transparent;
     }
-    .btn-warriors-outline:hover {
-        background: #8B0000;
-        box-shadow: 0 0 15px rgba(139, 0, 0, 0.4);
+    .element-physique { background: #444; color: #fff; }
+    .element-feu { background: #8B0000; color: #fff; border-color: #ff4444; }
+    .element-glace { background: #0066cc; color: #fff; border-color: #33ccff; }
+    .element-electrique { background: #ccaa00; color: #000; border-color: #ffff00; }
+    .element-explosif { background: #ff6600; color: #fff; border-color: #ffcc00; }
+
+    .description-box { min-height: 80px; }
+
+    .soneau-corner {
+        position: absolute; bottom: 0; right: 0; width: 20px; height: 20px;
+        background: linear-gradient(135deg, transparent 50%, #2DFFD9 50%);
+        opacity: 0.2;
     }
+
+    /* Styles pour différencier les éléments du seeder */
+    .element-feu { background: #8B0000; }
+    .element-glace { background: #0066cc; }
+    .element-electrique { background: #ccaa00; color: black; }
+    .element-physique { background: #444; }
+    .element-explosif { background: #ff6600; }
+    
+    .amalgame-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        transition: 0.2s;
+    }
+    .amalgame-card:hover { border-color: #2DFFD9; transform: scale(1.02); }
+    .text-turquoise { color: #2DFFD9; }
+    .border-turquoise { border-color: #2DFFD9; }
 </style>
 @endsection

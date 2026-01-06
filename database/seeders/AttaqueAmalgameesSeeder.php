@@ -17,13 +17,13 @@ class AttaqueAmalgameesSeeder extends Seeder
 
         $mappingArmes = [
             'Typhan'  => '1M',
-            'Quino'   => 'Lance',
-            'Cadlan'  => '2M',
+            'Quino'   => '2M',
+            'Cadlan'  => 'Lance',
             'Lago'    => '1M',
             'Pastos'  => '2M',
             'Braton'  => 'Lance',
             'Vence'   => '1M',
-            'Masba'   => 'Arc',
+            'Masba'   => 'Lance',
             'Sholani' => '1M',
             'Ronza'   => '2M',
         ];

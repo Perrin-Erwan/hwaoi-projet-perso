@@ -44,11 +44,10 @@ class CombatStyleSeeder extends Seeder
         
         // Lier des techniques à 'Maîtrise de l\'Épée'
         if ($styleMaitriseEpee && $frappeEtheree) {
-            $styleMaitriseEpee->skills()->sync([
-                $frappeEtheree->id => ['mastery_level' => 1],
-                // Ajoutez d'autres techniques si nécessaire
-            ]);
-        }
+    $styleMaitriseEpee->techniques()->sync([
+        $frappeEtheree->id => ['mastery_level' => 1],
+    ]);
+}
         
         // Lier des techniques à 'Mage Céleste'
         if ($styleMageCeleste && $arcLumiere) {

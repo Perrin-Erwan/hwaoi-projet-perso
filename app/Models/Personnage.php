@@ -48,9 +48,9 @@ class Personnage extends Model
     // RELATIONS
     // ========================================================
 
-    public function combatStyle(): BelongsTo
+    public function combatStyle()
     {
-        return $this->belongsTo(CombatStyle::class, 'classe_id'); 
+        return $this->belongsTo(CombatStyle::class, 'combat_style_id');
     }
     
     public function techniques(): BelongsToMany

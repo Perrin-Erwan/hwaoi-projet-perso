@@ -8,15 +8,6 @@ use App\Http\Controllers\AttaqueAmalgameeController;
 
 use Illuminate\Support\Facades\Route;
 
-//Route::get('/personnage', [PersonnageController::class, 'index'])->name('personnages.list');
-
-// Fichier : routes/web.php
-
-// ... autres routes ...
-
-// Route pour afficher le formulaire de modification
-// Fichier : routes/web.php
-
 // 1. Nouvelle Route Racinc pour l'Accueil (avec personnages aléatoires)
 Route::get('/', [PersonnageController::class, 'accueil'])->name('personnage.accueil');
 
@@ -44,3 +35,4 @@ Route::resource('styles-de-combat', CombatStyleController::class)->only(['index'
 // ... autres routes ...
 Route::get('/bestiaire', [EnnemiController::class, 'index'])->name('ennemis.index');
 Route::get('/amalgames', [AttaqueAmalgameeController::class, 'index'])->name('amalgames.index');
+Route::get('/styles-combat', [CombatStyleController::class, 'index'])->name('styles.index');

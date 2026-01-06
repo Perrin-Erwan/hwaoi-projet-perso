@@ -44,7 +44,7 @@
                     <li class="nav-item">
                         {{-- Supposition : la route pour les styles de combat existe --}}
                         <a class="nav-link {{ request()->routeIs('combat-styles.index') ? 'active' : '' }}" 
-                           href="{{ route('combat-styles.index') }}">Styles de Combat</a>
+                           href="{{ route('styles-combat.index') }}">Styles de Combat</a>
                     </li>
                     <li class="nav-item">
                         {{-- CORRECTION 2: Route plus cohérente avec le nom du modèle (TechniqueIndividuelle) --}}

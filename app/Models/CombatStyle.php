@@ -19,14 +19,15 @@ class CombatStyle extends Model
      * Relation Many-to-Many avec les techniques (skills) débloquées par ce style.
      * La table pivot doit contenir le champ 'mastery_level'.
      */
-    public function skills(): BelongsToMany
-    {
-        // REMPLACER 'style_skill' par le nom de votre table pivot.
-        // C'est la table qui lie CombatStyle et TechniqueIndividuelle.
-       return $this->belongsToMany(TechniqueIndividuelle::class, 'style_technique')
-                // Nous incluons withPivot car le seeder et la migration l'utilisent
-                ->withPivot('mastery_level');
-    }
+    public function techniques()
+{
+    return $this->belongsToMany(
+        TechniqueIndividuelle::class, 
+        'style_technique',           // Nom de ta table pivot
+        'combat_style_id',           // Clé étrangère vers CombatStyle (selon ta migration)
+        'technique_individuelle_id'  // Clé étrangère vers Technique (selon ta migration)
+    )->withPivot('mastery_level');
+}
 
     /**
      * Relation One-to-Many inverse avec les personnages qui utilisent ce style.

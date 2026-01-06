@@ -15,4 +15,9 @@ class AttaqueAmalgamees extends Model
         'arme_requise',
         'personnage_id',
     ];
+
+    public function personnage()
+{
+    return $this->belongsTo(Personnage::class, 'personnage_id');
+}
 }

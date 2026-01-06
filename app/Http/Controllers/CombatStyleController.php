@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
+use App\Models\CombatStyle;
 
 class CombatStyleController extends Controller
 {
-    public function index()
-    {
-        return view('coming-soon', ['pageTitle' => 'Styles de Combat']);
-    }
-    
+    public function index() {
+    // On charge la relation corrigée
+    $styles = CombatStyle::with('techniques')->get();
+    return view('styles.index', compact('styles'));
+}
     // Ajoutez également la méthode show() pour éviter une erreur
     public function show($id)
     {
