@@ -35,4 +35,4 @@ Route::resource('styles-de-combat', CombatStyleController::class)->only(['index'
 // ... autres routes ...
 Route::get('/bestiaire', [EnnemiController::class, 'index'])->name('ennemis.index');
 Route::get('/amalgames', [AttaqueAmalgameeController::class, 'index'])->name('amalgames.index');
-Route::get('/styles-combat', [CombatStyleController::class, 'index'])->name('styles.index');
+Route::get('/styles-combat', [CombatStyleController::class, 'index'])->name('styles-combat.index');
