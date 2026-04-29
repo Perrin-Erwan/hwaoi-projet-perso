@@ -17,8 +17,7 @@ class CombatStyleSeeder extends Seeder
         CombatStyle::truncate();
         Schema::enableForeignKeyConstraints();
 
-        // --- CONFIGURATION DES PERSONNAGES ---
-        // Ajoute simplement tes 19 personnages ici au fur et à mesure
+       
         $stylesData = [
             [
                 'nom' => 'Force royale Soneau',
@@ -59,15 +58,75 @@ class CombatStyleSeeder extends Seeder
             [
                 'nom' => 'Sage du feu',
                 'type' => 'Action d\'Agraston',
-                'description' => '.',
-                'techniques' => ['Rebond fongique'] 
+                'description' => 'Derrière sa carrure imposante, le robuste chef des Gorons renferme une passion silencieuse. 
+                Il roule sur le champ de bataille, envoyant voler les ennemis à chaque moulinet de son énorme épée.
+                Ses attaques sont enveloppées par le pouvoir du feu et lui permettent de détruire de gros rochers.',
+                'techniques' => ['éruption collossale'] 
             ],
-            // AJOUTE LES 16 AUTRES ICI...
+            [
+                'nom' => 'Sage de l\'eau',
+                'type' => 'Action de Qia',
+                'description' => 'La reine des Zoras est une guerrière intrépide qui manie la lance et utilise sa maîtrise des courants pour manipuler l\'eau 
+                et attaquer violemment ses ennemis.
+                Appuyez sur YYYYX pour créer un tourbillon qui attire les ennemis alentours.',
+                'techniques' => ['Torrents débordants'] 
+            ],
+            [
+                'nom' => 'Sage du vent',
+                'type' => 'Action de Raphica',
+                'description' => 'Alors qu\'il parcourt avec les cieux au-dessus du champ de bataille, 
+                le chef des Piafs combat en tirant des flèches depuis le ciel et en donnant de puissant coups de serres. 
+                Appuyez sur YYYX pour manipuler des sphères de vent qui attaquent sur un large périmètre. 
+                Lorsque duvent touche les ennemis enflammés, gelées ou électrocutés, ou certains artéfacts soneaux posés au sol, une combinaison d\'actions se produit,
+                créant des tourbillons de flammes, de glace ou de foudre.',
+                'techniques' => ['Chute céleste'] 
+            ],
+            [
+                'nom' => 'Sage de la foudre',
+                'type' => 'Action d\'Ardi',
+                'description' => 'Cette guerrière gerudo manipule son cimeterre avec habileté et élégance, 
+                lui insufflant le pouvoir de la foudre pour terrasser ses ennemis. Lorsque vous vous protégez avec ZL, 
+                appuyez sur Y au bon moment pour effectuer une garde optimale avec votre bouclier.',
+                'techniques' => ['Coup de pied foudroyant'] 
+            ],
+            [
+                'nom' => 'Guerrier vétéran d\'hyrule',
+                'type' => 'Action de Typhan',
+                'description' => 'Un guerrier d\'hyrule expérimenté qui combat à l\'aide d\'une épée à une main et un bouclier.
+                Ses puissantes attaques lui pemettent de dominer ses ennemis. Lorsque vous vous protégez avec ZL, 
+                appuyez sur Y au bon moment pour effectuer une garde optimale avec votre bouclier.',
+                'techniques' => ['Frénésie volante'] 
+            ],
+            [
+                'nom' => ' Jeune Guerrier d\'hyrule',
+                'type' => 'Action de Quino',
+                'description' => 'Un jeune guerrier d\'élite hylien qui manie avec brio une énorme épée à deux mains 
+                et ferait tout pour protéger le royaume d\'Hyrule qu\'il aimes tant. 
+                Certaines de ses attaques fortes envoient une onde tranchante qui peut frapper les ennemis éloignés.',
+                'techniques' => ['Lacération projetée'] 
+            ],
+            [
+                'nom' => 'Guerrier vétéran Zora',
+                'type' => 'Action de Lago',
+                'description' => 'Un vétéran qui servait le précédent roi zora. 
+                épée en main, il attaque avec une virtuosité exceptionnelle et une vitesse incroyable. 
+                Utilisée au bon moment, sa technique individuelle "Ressac" peut repousser les attaques ennemis.',
+                'techniques' => ['Ressac'] 
+            ],
+            [
+                'nom' => 'Admirateur zora',
+                'type' => 'Action de Cadlan',
+                'description' => 'Un jeune soldat zora entièrement dévoué à Qia. Bien qu\'encore un peu brut, 
+                il est très agile et manie sa lance avec une grande dextérité sur le champ de bataille. 
+                Pendant les attaques fortes, maintenez X enfoncer pour que les lames d\'eau attaquent sur un plus large périmètre.',
+                'techniques' => ['Déluge au sommet'] 
+            ],
+            
         ];
 
-        // --- LOGIQUE D'INSERTION AUTOMATIQUE ---
+        
         foreach ($stylesData as $data) {
-            // Création du style
+            
             $style = CombatStyle::create([
                 'nom' => $data['nom'],
                 'type' => $data['type'],

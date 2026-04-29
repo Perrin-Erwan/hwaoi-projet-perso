@@ -198,8 +198,8 @@ public function run(): void
         ],
         'Quino' => [
             [
-                'nom' => 'Lacération projetée', 'description' => 
-                'Frappez le sol d\'un coup d\'épée projetant une onde de choc vers l\'avant.', 
+                'nom' => 'Lacération projetée', 
+                'description' => 'Frappez le sol d\'un coup d\'épée projetant une onde de choc vers l\'avant.', 
                 'dégâts' => 80
             ],
             [
