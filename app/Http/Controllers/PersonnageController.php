@@ -7,6 +7,8 @@ use App\Models\Personnage;
 use App\Models\TechniqueIndividuelle; 
 use App\Models\Arme;
 use App\Models\CombatStyle;
+ use Illuminate\Support\Facades\Storage; 
+
 
 class PersonnageController extends Controller
 {
@@ -82,6 +84,45 @@ class PersonnageController extends Controller
         ));
     }
 
+    public function create()
+{
+    return view('personnages.create'); // On va créer cette vue juste après
+}
+
+public function store(Request $request)
+{
+    // 1. Validation (Même logique que update, mais le nom doit être unique sans exception)
+    $request->validate([
+        'nom' => 'required|string|max:255|unique:personnage,nom',
+        'alias' => 'nullable|string|max:255',
+        'description_courte' => 'nullable|string|max:255',
+        'description' => 'required|string',
+        'role' => 'nullable|string|max:255',
+        'coeurs_base' => 'required|integer|min:1',
+        'arme_principale' => 'required|string|max:255',
+        'element' => 'nullable|string|max:255',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    $personnage = new Personnage();
+
+    // 2. Gestion de l'image
+    if ($request->hasFile('image')) {
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->storeAs('personnages', $imageName, 'public');
+        $personnage->image_path = $imageName;
+    }
+
+    // 3. Remplissage des données
+    $personnage->fill($request->only([
+        'nom', 'alias', 'description_courte', 'description', 'role', 
+        'coeurs_base', 'arme_principale', 'element'
+    ]));
+
+    $personnage->save();
+
+    return redirect()->route('personnage.list')->with('success', 'Le nouveau guerrier a été consigné dans les archives !');
+}
     /**
      * Affiche le formulaire pour modifier un personnage existant.
      * 💡 AMÉLIORATION: Utilise le Route Model Binding (Personnage $personnage).
@@ -99,34 +140,50 @@ class PersonnageController extends Controller
      * Met à jour le personnage dans la base de données.
      * 💡 AMÉLIORATION: Utilise le Route Model Binding (Personnage $personnage).
      */
-    public function update(Request $request, Personnage $personnage)
-    {
-        // 1. Validation des données
-        $request->validate([
-            // La validation doit ignorer l'enregistrement actuel en utilisant l'ID
-            'nom' => 'required|string|max:255|unique:personnage,nom,' . $personnage->id . ',id', 
-            'alias' => 'nullable|string|max:255',
-            'description_courte' => 'nullable|string|max:255',
-            'description' => 'required|string',
-            'role' => 'nullable|string|max:255',
-            'coeurs_base' => 'required|integer|min:1',
-            'arme_principale' => 'required|string|max:255',
-            'element' => 'nullable|string|max:255',
-        ]);
+   
+public function update(Request $request, Personnage $personnage)
+{
+    // 1. Validation des données (on ajoute la règle pour l'image)
+    $request->validate([
+        'nom' => 'required|string|max:255|unique:personnage,nom,' . $personnage->id . ',id', 
+        'alias' => 'nullable|string|max:255',
+        'description_courte' => 'nullable|string|max:255',
+        'description' => 'required|string',
+        'role' => 'nullable|string|max:255',
+        'coeurs_base' => 'required|integer|min:1',
+        'arme_principale' => 'required|string|max:255',
+        'element' => 'nullable|string|max:255',
+        // Règle pour l'image : max 2Mo, types autorisés
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
+    ]);
 
-        // 2. Remplir et sauvegarder les données
-        $personnage->fill($request->only([
-            'nom', 'alias', 'description_courte', 'description', 'role', 
-            'coeurs_base', 'arme_principale', 'element'
-        ]));
+    // 2. Gestion de l'image (Upload)
+    if ($request->hasFile('image')) {
+        // Supprimer l'ancienne image du disque si elle existe
+        if ($personnage->image_path) {
+            Storage::disk('public')->delete('personnages/' . $personnage->image_path);
+        }
 
-        $personnage->save();
+        // Créer un nom unique (ex: 171456789.png) et stocker dans storage/app/public/personnages
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->storeAs('personnages', $imageName, 'public');
 
-        // 3. Redirection vers la page de détail mise à jour
-        // 🚨 CORRECTION : On passe le nom (la clé de la route) au lieu de l'objet ou l'ID seul.
-        return redirect()->route('personnage.show', ['personnage' => $personnage->nom])
-                        ->with('success', 'Le personnage ' . $personnage->nom . ' a été mis à jour avec succès !');
+        // Mettre à jour le chemin dans l'objet personnage
+        $personnage->image_path = $imageName;
     }
+
+    // 3. Remplir et sauvegarder les données textuelles
+    $personnage->fill($request->only([
+        'nom', 'alias', 'description_courte', 'description', 'role', 
+        'coeurs_base', 'arme_principale', 'element'
+    ]));
+
+    $personnage->save();
+
+    // 4. Redirection vers la page de détail mise à jour
+    return redirect()->route('personnage.show', ['personnage' => $personnage->nom])
+                    ->with('success', 'Le personnage ' . $personnage->nom . ' a été mis à jour avec succès !');
+}
     
     // ... (systemeJeu method)
     

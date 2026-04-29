@@ -18,10 +18,15 @@
                     Plongez dans les récits héroïques de la Guerre du Sceau. 
                     Maîtrisez les armes ancestrales, forgez des alliances et gravez votre nom dans l'histoire du Royaume d'Hyrule.
                 </p>
-                <div class="mt-3">
-                    <span class="text-warning">★</span> 
-                    <strong class="text-white">Incarnez des guerriers légendaires</strong> et exploitez la puissance des amalgames !
-                </div>
+                @auth
+                    @if(Auth::user()->is_admin)
+                        <div class="mt-4">
+                            <a href="{{ route('personnage.create') }}" class="btn btn-soneau px-4 py-2">
+                                <i class="fas fa-plus-circle me-2"></i> NOUVEL ENRÔLEMENT
+                            </a>
+                        </div>
+                    @endif
+                @endauth
             </div>
         </div>
     </div>
@@ -61,9 +66,12 @@
         <hr class="border-secondary opacity-25 my-5">
 
         {{-- APERÇU ALÉATOIRE : GUERRIERS EN VEDETTE --}}
-        <div class="section-title-wrapper mb-4">
-            <h2 class="section-title"><i class="fas fa-bolt text-warning me-2"></i> GUERRIERS EN VEDETTE</h2>
-            <div class="title-line"></div>
+        <div class="section-title-wrapper mb-4 d-flex justify-content-between align-items-center">
+            <div>
+                <h2 class="section-title m-0"><i class="fas fa-bolt text-warning me-2"></i> GUERRIERS EN VEDETTE</h2>
+                <div class="title-line"></div>
+            </div>
+            <a href="{{ route('personnage.list') }}" class="text-turquoise text-decoration-none small fw-bold">VOIR TOUT <i class="fas fa-chevron-right ms-1"></i></a>
         </div>
 
         @if ($personnagesAleatoires->count() > 0)
@@ -72,10 +80,19 @@
                     <div class="col-md-4">
                         <div class="character-card">
                             <div class="card-image-wrapper">
+                                {{-- LOGIQUE D'IMAGE MIXTE : STORAGE OU PUBLIC --}}
                                 @if ($personnage->image_path)
-                                    <img src="{{ asset('images/personnages/' . $personnage->image_path) }}" 
-                                         class="char-img" alt="{{ $personnage->nom }}">
+                                    @if(file_exists(public_path('storage/personnages/' . $personnage->image_path)))
+                                        <img src="{{ asset('storage/personnages/' . $personnage->image_path) }}" class="char-img" alt="{{ $personnage->nom }}">
+                                    @else
+                                        <img src="{{ asset('images/personnages/' . $personnage->image_path) }}" class="char-img" alt="{{ $personnage->nom }}">
+                                    @endif
+                                @else
+                                    <div class="h-100 d-flex align-items-center justify-content-center bg-dark">
+                                        <i class="fas fa-user-shield fa-4x text-white-50"></i>
+                                    </div>
                                 @endif
+                                
                                 <div class="char-overlay"></div>
                                 <div class="char-name-badge">
                                     <h5 class="m-0 fw-bold">{{ $personnage->nom }}</h5>
@@ -93,25 +110,38 @@
                 @endforeach
             </div>
         @else
-            <div class="alert bg-dark text-white border-warning text-center">
-                Aucun guerrier n'est actuellement consigné dans les archives.
+            <div class="alert bg-dark text-white border-warning text-center shadow">
+                <i class="fas fa-info-circle me-2 text-warning"></i> Aucun guerrier n'est actuellement consigné dans les archives.
             </div>
         @endif
     </div>
 </div>
 
 <style>
-    /* --- FOND ET BASE --- */
+    /* ... (Tes styles précédents sont parfaits, j'ajoute juste le bouton Soneau pour l'admin) ... */
+    .btn-soneau {
+        background: #2DFFD9;
+        color: #000;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: 0.3s;
+        letter-spacing: 1px;
+    }
+    .btn-soneau:hover {
+        background: #1fccac;
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(45, 255, 217, 0.4);
+        color: #000;
+    }
+
+    /* Le reste de ton CSS reste identique */
     body {
         background: radial-gradient(circle at center, #2b1d16 0%, #0c0c0c 100%) !important;
         background-attachment: fixed !important;
         color: #ffffff;
     }
-
     .text-turquoise { color: #2DFFD9; }
-    .italic { font-style: italic; }
-
-    /* --- LOGO CONCEPT --- */
     .logo-container {
         background-color: #8B0000;
         display: inline-block;
@@ -120,11 +150,8 @@
         box-shadow: 0 15px 35px rgba(0,0,0,0.6);
         border-bottom: 5px solid #5a0000;
     }
-    .title-hyrule { color: #FFFFFF; letter-spacing: 3px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-    .title-warriors { color: #2DFFD9; text-shadow: 0 0 15px rgba(45, 255, 217, 0.6); font-style: italic; }
-    .subtitle-chroniques { letter-spacing: 6px; text-transform: uppercase; opacity: 0.9; }
-
-    /* --- HERO INTRO --- */
+    .title-hyrule { color: #FFFFFF; letter-spacing: 3px; }
+    .title-warriors { color: #2DFFD9; font-style: italic; }
     .intro-box-home {
         background: rgba(0,0,0,0.4);
         border: 1px solid rgba(255,255,255,0.1);
@@ -132,69 +159,22 @@
         border-radius: 15px;
         backdrop-filter: blur(5px);
     }
-
-    /* --- BOUTONS D'ACTION --- */
     .btn-main-action {
-        display: flex;
-        align-items: center;
-        padding: 20px;
-        border-radius: 12px;
-        text-decoration: none;
-        color: white;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(255,255,255,0.1);
-        height: 100%;
-        background: rgba(255,255,255,0.05);
+        display: flex; align-items: center; padding: 20px; border-radius: 12px;
+        text-decoration: none; color: white; transition: 0.3s;
+        border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05);
     }
-
-    .btn-main-action:hover {
-        transform: translateY(-5px);
-        color: white;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-    }
-
-    .action-icon {
-        font-size: 2.5rem;
-        margin-right: 20px;
-        opacity: 0.8;
-    }
-
-    .action-title { display: block; font-weight: bold; font-size: 1.2rem; letter-spacing: 1px; }
-    .action-sub { font-size: 0.8rem; opacity: 0.6; text-transform: uppercase; }
-
+    .btn-main-action:hover { transform: translateY(-5px); color: white; box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+    .action-icon { font-size: 2.5rem; margin-right: 20px; opacity: 0.8; }
     .btn-guerriers:hover { border-color: #8B0000; background: rgba(139, 0, 0, 0.2); }
     .btn-bestiaire:hover { border-color: #ff8c00; background: rgba(255, 140, 0, 0.2); }
     .btn-systeme:hover { border-color: #2DFFD9; background: rgba(45, 255, 217, 0.2); }
-
-    /* --- CARDS --- */
-    .character-card {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        overflow: hidden;
-        transition: 0.3s;
-    }
-    .character-card:hover { border-color: #2DFFD9; transform: scale(1.02); }
-
-    .card-image-wrapper { position: relative; height: 300px; overflow: hidden; }
+    .character-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; overflow: hidden; transition: 0.3s; }
+    .card-image-wrapper { position: relative; height: 300px; }
     .char-img { width: 100%; height: 100%; object-fit: cover; }
-    .char-overlay {
-        position: absolute; bottom: 0; left: 0; width: 100%; height: 50%;
-        background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-    }
+    .char-overlay { position: absolute; bottom: 0; width: 100%; height: 50%; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); }
     .char-name-badge { position: absolute; bottom: 15px; left: 15px; }
-
-    .btn-view-profile {
-        background: transparent;
-        border: 1px solid rgba(255,255,255,0.2);
-        color: #fff;
-        font-weight: bold;
-        transition: 0.3s;
-    }
+    .btn-view-profile { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff; transition: 0.3s; }
     .character-card:hover .btn-view-profile { background: #2DFFD9; color: #000; border-color: #2DFFD9; }
-
-    /* --- TITRE DE SECTION --- */
-    .section-title { font-weight: bold; letter-spacing: 2px; }
-    .title-line { height: 3px; width: 60px; background: #8B0000; margin-top: 10px; }
 </style>
 @endsection

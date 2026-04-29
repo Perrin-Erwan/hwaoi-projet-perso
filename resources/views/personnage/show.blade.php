@@ -11,11 +11,13 @@
             <a href="{{ route('personnage.list') }}" class="btn btn-warriors-outline">
                 <i class="fas fa-chevron-left me-2"></i> Archives Royales
             </a>
-            <div class="d-flex">
-                <a href="{{ route('personnage.edit', $personnage->nom) }}" class="btn btn-soneau-sm me-2">
-                    <i class="fas fa-edit"></i> Modifier
-                </a>
-            </div>
+           @auth
+    @if(Auth::user()->is_admin)
+        <a href="{{ route('personnage.edit', $personnage) }}" class="btn btn-warning">
+            <i class="fas fa-edit"></i> Modifier
+        </a>
+    @endif
+@endauth
         </div>
 
         {{-- BANNIÈRE DE TITRE --}}
@@ -29,8 +31,7 @@
             @if ($personnage->image_path)
                 <div class="col-lg-6">
                     <div class="portrait-frame shadow-lg">
-                        <img src="{{ asset('images/personnages/' .$personnage->image_path) }}" 
-                             class="img-fluid main-portrait" alt="{{ $personnage->nom }}">
+                        <img src="{{ asset('storage/personnages/' . $personnage->image_path) }}" alt="{{ $personnage->nom }}">
                         <div class="frame-decoration top-left"></div>
                         <div class="frame-decoration bottom-right"></div>
                     </div>

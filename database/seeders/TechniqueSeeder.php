@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Personnage;
-use App\Models\TechniqueIndividuelle; // Assurez-vous d'importer le bon modèle
+use App\Models\TechniqueIndividuelle; 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
