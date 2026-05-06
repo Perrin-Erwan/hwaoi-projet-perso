@@ -27,11 +27,15 @@
         </div>
 
         <div class="row g-4">
-            {{-- PORTRAIT DU GUERRIER --}}
+            {{-- PORTRAIT DU GUERRIER (MODIFICATION TECHNIQUE ICI) --}}
             @if ($personnage->image_path)
                 <div class="col-lg-6">
                     <div class="portrait-frame shadow-lg">
-                        <img src="{{ asset('storage/personnages/' . $personnage->image_path) }}" alt="{{ $personnage->nom }}">
+                        {{-- Ajout du style inline pour garantir l'adaptation parfaite --}}
+                        <img src="{{ asset('storage/personnages/' . $personnage->image_path) }}" 
+                             alt="{{ $personnage->nom }}"
+                             style="width: 100%; height: 100%; object-fit: cover; object-position: center top;">
+                        
                         <div class="frame-decoration top-left"></div>
                         <div class="frame-decoration bottom-right"></div>
                     </div>
@@ -332,5 +336,44 @@
     .btn-warriors-outline { border: 1px solid #8B0000; color: white; text-transform: uppercase; font-weight: bold; }
     .btn-warriors-outline:hover { background: #8B0000; color: white; }
     .btn-soneau-sm { background: #2DFFD9; color: #000; border: none; font-weight: bold; padding: 5px 15px; border-radius: 4px; }
+    /* --- STYLE SOURCE CONSERVÉ --- */
+    body {
+        background-color: #1a1a1a !important; /*[cite: 1] */
+        color: #f0f0f0 !important; /*[cite: 1] */
+        font-family: 'MedievalSharp', cursive !important; /*[cite: 1] */
+    }
+
+    .portrait-frame {
+        position: relative;
+        background: rgba(0,0,0,0.5);
+        padding: 10px;
+        border: 1px solid rgba(255,255,255,0.1);
+        height: 600px; /* Fixe la hauteur pour l'alignement */
+        overflow: hidden;
+    }
+
+    .text-turquoise { color: #2DFFD9 !important; }
+    
+    .char-header-banner {
+        background: linear-gradient(90deg, #8B0000 0%, transparent 100%);
+        padding: 20px;
+        border-left: 5px solid #2DFFD9;
+    }
+
+    .frame-decoration {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #2DFFD9;
+    }
+    .top-left { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+    .bottom-right { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+    .info-card { background: #2a2a2a; border-radius: 8px; }
+    .info-header { background: #0a5d4c; padding: 10px; font-weight: bold; } /*[cite: 1] */
+    
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .btn-warriors-outline { border: 1px solid #c9a237; color: #c9a237; } /*[cite: 1] */
+    .btn-warriors-outline:hover { background: #c9a237; color: #1a1a1a; } /*[cite: 1] */
 </style>
 @endsection
