@@ -32,7 +32,7 @@
                 <div class="col-lg-6">
                     <div class="portrait-frame shadow-lg">
                         {{-- Ajout du style inline pour garantir l'adaptation parfaite --}}
-                        <img src="{{ asset('storage/personnages/' . $personnage->image_path) }}" 
+                        <img src="{{ asset('public/images/personnages/' . $personnage->image_path) }}" 
                              alt="{{ $personnage->nom }}"
                              style="width: 100%; height: 100%; object-fit: cover; object-position: center top;">
                         

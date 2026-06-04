@@ -82,8 +82,8 @@
                             <div class="card-image-wrapper">
                                 {{-- LOGIQUE D'IMAGE MIXTE : STORAGE OU PUBLIC --}}
                                 @if ($personnage->image_path)
-                                    @if(file_exists(public_path('storage/personnages/' . $personnage->image_path)))
-                                        <img src="{{ asset('storage/personnages/' . $personnage->image_path) }}" class="char-img" alt="{{ $personnage->nom }}">
+                                    @if(file_exists(public_path('public/image/personnages/' . $personnage->image_path)))
+                                        <img src="{{ asset('public/images/personnages/' . $personnage->image_path) }}" class="char-img" alt="{{ $personnage->nom }}">
                                     @else
                                         <img src="{{ asset('images/personnages/' . $personnage->image_path) }}" class="char-img" alt="{{ $personnage->nom }}">
                                     @endif
