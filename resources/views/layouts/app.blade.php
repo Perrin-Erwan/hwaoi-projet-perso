@@ -37,6 +37,8 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('personnage.list') }}">Guerriers</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('combat-styles.index') }}">Styles de Combat</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('technique-individuelles.index') }}">Techniques</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('ennemis.index') }}">Bestiaire</a></li>
+                     <li class="nav-item"><a class="nav-link" href="{{ route('amalgames.index') }}">Attaques Amalgamées</a></li>
                 </ul>
 
                 <div class="auth-links d-flex align-items-center">
