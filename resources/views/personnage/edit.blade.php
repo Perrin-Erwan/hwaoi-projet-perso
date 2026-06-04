@@ -61,7 +61,7 @@
                             <div class="col-md-3 mb-3 mb-md-0 text-center">
                                 @if($personnage->image_path)
                                     <p class="small text-muted mb-1">Actuelle :</p>
-                                    <img src="{{ asset('public/images/personnages/' . $personnage->image_path) }}" class="rounded border border-turquoise" style="height: 100px; width: 100px; object-fit: cover;">
+                                    <img src="{{ asset('images/personnages/' . $personnage->image_path) }}" class="rounded border border-turquoise" style="height: 100px; width: 100px; object-fit: cover;">
                                 @else
                                     <div class="rounded border border-secondary d-flex align-items-center justify-content-center" style="height: 100px; width: 100px; background: rgba(255,255,255,0.05)">
                                         <i class="fas fa-image text-muted"></i>

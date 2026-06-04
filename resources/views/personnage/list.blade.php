@@ -42,7 +42,7 @@
                         <div class="character-card">
                             <div class="card-image-wrapper">
                                 @if ($personnage->image_path)
-                                   <img src="{{ asset('public/images/personnages/' . $personnage->image_path) }}" alt="{{ $personnage->nom }}">
+                                   <img src="{{ asset('images/personnages/' . $personnage->image_path) }}" alt="{{ $personnage->nom }}">
                                 @endif
                                 <div class="char-overlay"></div>
                                 <div class="char-name-badge">
