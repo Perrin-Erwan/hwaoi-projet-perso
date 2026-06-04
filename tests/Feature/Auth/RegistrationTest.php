@@ -28,4 +28,17 @@ class RegistrationTest extends TestCase
         $this->assertAuthenticated();
         $response->assertRedirect(route('dashboard', absolute: false));
     }
+
+    public function test_user_is_saved_in_database_after_registration(): void
+    {
+        $response = $this->post('/register', [
+            'name' => 'Test User 2',
+            'email' => 'test2@example.com',
+            'password' => 'password',
+            'password_confirmation' => 'password',
+        ]);
+
+        $response->assertStatus(302);
+        $this->assertDatabaseHas('users', ['email' => 'test2@example.com']);
+    }
 }
